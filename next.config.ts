@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Use standalone output for deployment flexibility
+  // Output standalone for Node.js platforms (Railway, Render, Vercel)
   output: "standalone",
   
-  // Image configuration
+  // Disable image optimization for faster builds
   images: {
     unoptimized: true,
   },

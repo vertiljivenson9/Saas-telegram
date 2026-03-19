@@ -1,122 +1,132 @@
 # AutoPost - SaaS Content Publisher
 
-A modern SaaS platform for publishing content to multiple social platforms automatically.
+Una aplicación SaaS moderna para publicar contenido en múltiples plataformas automáticamente.
 
-## Features
+## 🚀 Opciones de Deployment
 
-- 🔐 **Firebase Authentication** - Google and Email/Password login
-- 📝 **Content Management** - Create, edit, and delete posts
-- 📱 **Telegram Integration** - Auto-publish to Telegram channels
-- 🖼️ **Cloudinary Upload** - Image upload with Cloudinary
-- 🎨 **Dark Mode UI** - Modern, responsive design
-- 📱 **Mobile First** - Fully responsive with mobile navigation
-- 🔄 **Demo Mode** - Try the app without signing in
+### ⚠️ IMPORTANTE: Cloudflare Pages NO soporta API routes
 
-## Tech Stack
+Cloudflare Pages usa **Edge Runtime**, no Node.js. Esto significa que las API routes de Next.js NO funcionarán.
 
-- **Framework**: Next.js 16 with App Router
-- **Auth**: Firebase Authentication
-- **Database**: Firebase Firestore
-- **Image Storage**: Cloudinary
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Icons**: Lucide React
+**Tienes 3 opciones:**
 
-## Getting Started
+---
 
-### 1. Clone the repository
+### Opción 1: Railway.app (RECOMENDADO)
 
-```bash
-git clone <your-repo>
-cd autopost
-bun install
-```
+✅ Soporta Next.js completo con API routes
+✅ Deployment automático desde GitHub
+✅ Fácil configuración
 
-### 2. Configure Environment Variables
-
-Copy `.env.example` to `.env` and fill in your credentials:
+**Pasos:**
+1. Ve a [railway.app](https://railway.app)
+2. Login con GitHub
+3. "New Project" → "Deploy from GitHub repo"
+4. Selecciona `Saas-telegram`
+5. Agrega variables de entorno:
 
 ```env
-# Firebase Configuration
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-
-# Cloudinary Configuration
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLOUDINARY_CLOUD_NAME=ddquy4oim
+CLOUDINARY_API_KEY=399214546928275
+CLOUDINARY_API_SECRET=sEMWm8uzPVTUqslnkImcqTtvguU
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyAIAbGS5saZiSxDW7eajGVO-ba-jGf2vgA
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=saastelegram-459f9.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=saastelegram-459f9
 ```
 
-### 3. Run Development Server
+---
+
+### Opción 2: Render.com (GRATIS)
+
+✅ Plan gratuito disponible
+✅ Soporta Next.js con API routes
+
+**Pasos:**
+1. Ve a [render.com](https://render.com)
+2. "New" → "Web Service"
+3. Conecta tu repo
+4. Configura:
+   - Build: `npm install && npm run build`
+   - Start: `npm start`
+5. Agrega las variables de entorno
+
+---
+
+### Opción 3: Vercel (CREADOR DE NEXT.JS)
+
+✅ Soporte nativo para Next.js
+✅ Deployment en 1 click
+
+**Pasos:**
+1. Ve a [vercel.com](https://vercel.com)
+2. Importa tu repo de GitHub
+3. Agrega las variables de entorno
+4. Deploy
+
+---
+
+## 📦 Desarrollo Local
 
 ```bash
+# Instalar dependencias
+bun install
+
+# Copiar variables de entorno
+cp .env.example .env
+# Edita .env con tus valores
+
+# Ejecutar en desarrollo
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+## 🔧 Variables de Entorno
 
-## Deployment to Cloudflare Pages
+| Variable | Valor |
+|----------|-------|
+| `CLOUDINARY_CLOUD_NAME` | `ddquy4oim` |
+| `CLOUDINARY_API_KEY` | `399214546928275` |
+| `CLOUDINARY_API_SECRET` | `sEMWm8uzPVTUqslnkImcqTtvguU` |
+| `NEXT_PUBLIC_FIREBASE_API_KEY` | `AIzaSyAIAbGS5saZiSxDW7eajGVO-ba-jGf2vgA` |
+| `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `saastelegram-459f9.firebaseapp.com` |
+| `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | `saastelegram-459f9` |
 
-### Option 1: Direct Upload
+## 🎨 Características
 
-1. Build the project:
-   ```bash
-   bun run build
-   ```
+- 🔐 **Firebase Auth** - Google + Email/Password
+- 📤 **Cloudinary** - Upload de imágenes
+- 📱 **Telegram** - Publicación automática
+- 🎯 **Firestore** - Base de datos en tiempo real
+- 📱 **Mobile First** - Diseño responsivo
+- 🌙 **Dark Mode** - UI moderna
 
-2. Deploy the `.next` folder to Cloudflare Pages
-
-### Option 2: Git Integration
-
-1. Connect your repository to Cloudflare Pages
-2. Set build command: `bun run build`
-3. Set output directory: `.next`
-4. Add environment variables in Cloudflare dashboard
-
-### Environment Variables for Cloudflare
-
-Set these in your Cloudflare Pages dashboard:
-
-- `NEXT_PUBLIC_FIREBASE_API_KEY`
-- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
-- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
-- `CLOUDINARY_CLOUD_NAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
-
-**Note**: API routes will not work on Cloudflare Pages static hosting. For full functionality, use Cloudflare Workers or deploy to a Node.js environment (VPS, Railway, Render, etc.).
-
-## Telegram Bot Setup
-
-1. Create a bot via [@BotFather](https://t.me/BotFather) on Telegram
-2. Copy the bot token
-3. Add your bot to the channel/group as admin
-4. Get the channel/group ID using [@userinfobot](https://t.me/userinfobot)
-5. Enter both in the Settings page
-
-## Project Structure
+## 📁 Estructura
 
 ```
 src/
 ├── app/
-│   ├── api/
-│   │   ├── posts/route.ts      # Posts CRUD
-│   │   ├── upload/route.ts     # Cloudinary upload
-│   │   └── telegram/           # Telegram integration
-│   ├── page.tsx                # Main app
-│   ├── layout.tsx              # Root layout
-│   └── globals.css             # Global styles
+│   ├── api/              # API Routes
+│   │   ├── posts/        # CRUD posts
+│   │   ├── upload/       # Cloudinary upload
+│   │   └── telegram/     # Telegram integration
+│   ├── page.tsx          # App principal
+│   └── layout.tsx        # Layout
 ├── components/
-│   ├── Dashboard.tsx           # Dashboard component
-│   ├── AutoPostLogo.tsx        # Logo component
-│   └── ui/                     # shadcn/ui components
+│   ├── Dashboard.tsx     # Dashboard
+│   └── ui/               # Componentes UI
 ├── hooks/
-│   └── use-session.tsx         # Auth hook
+│   └── use-session.tsx   # Auth context
 └── lib/
-    ├── firebase.ts             # Firebase config
-    └── utils.ts                # Utilities
+    └── firebase.ts       # Firebase config
 ```
 
-## License
+## 📱 Telegram Setup
 
-MIT License
+1. Crea un bot con [@BotFather](https://t.me/BotFather)
+2. Copia el token del bot
+3. Agrega el bot a tu canal como admin
+4. Obtén el ID del canal con [@userinfobot](https://t.me/userinfobot)
+5. Configura en Settings
+
+## 📄 Licencia
+
+MIT
